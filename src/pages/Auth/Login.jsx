@@ -2,18 +2,19 @@ import React, { useState } from "react";
 import Layout from "../../conponents/layout/Layout";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 
 
 const initial = { email: "", password: "" };
 const Login = () => {
     const [auth,setAuth] = useAuth()
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const location = useLocation()
   const [user, setUser] = useState(initial);
   const handleChange = function (e) {
     setUser({ ...user, [e.target.name]: e.target.value });
-    console.log(user);
+    // console.log(user); 
   };
 
   const handleSubmit = async function (e) {
@@ -25,9 +26,10 @@ const Login = () => {
         );
         if (res && res.data.success) {
             toast.success(res.data.message);
-            setAuth({...auth,user:res.data.user,token:res.data.token})
+          setAuth({ ...auth, user: res.data.user, token: res.data.token })
+          localStorage.setItem("auth",JSON.stringify(res.data))
             setTimeout(() => {
-                navigate("/");
+                navigate(location.state || "/");
             }, 1000);
         } else {
             toast.error(res.data.message);
@@ -46,7 +48,6 @@ const Login = () => {
           action=""
           className="flex flex-col w-[40%] gap-10"
         >
-          
           <input
             className="border text-center"
             type="email"
@@ -63,7 +64,8 @@ const Login = () => {
             onChange={handleChange}
             placeholder="enter your password "
           />
-         
+
+          <input className="border text-center" type="button" value="forgate password" onClick={()=>navigate("/forgotepassword")} />
           <input className="border text-center" type="submit" value="Login" />
         </form>
       </div>

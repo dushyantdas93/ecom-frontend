@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 
-const initial = { name: "", email: "", password: "", phone: "", address: "" };
+const initial = { name: "", email: "", password: "", phone: "", address: "" , answer:""};
 const Register = () => {
     const navigate = useNavigate()
     const [user, setUser] = useState(initial)
@@ -39,7 +39,11 @@ const Register = () => {
       <Layout title="Registe ecomm-2024">
         <h2 className="text-center text-2xl py-2">Register form</h2>
         <div className="w-full h-full flex items-center justify-center ">
-          <form onSubmit={handleSubmit} action="" className="flex flex-col w-[40%] gap-10">
+          <form
+            onSubmit={handleSubmit}
+            action=""
+            className="flex flex-col w-[40%] gap-10"
+          >
             <input
               className="border text-center"
               type="text"
@@ -83,6 +87,15 @@ const Register = () => {
               value={user.address}
               onChange={handleChange}
               placeholder="enter your address "
+              required
+            />
+            <input
+              className="border text-center"
+              type="text"
+              name="answer"
+              value={user.answer}
+              onChange={handleChange}
+              placeholder="what is your birth date like 10-04-2002 "
               required
             />
             <input className="border text-center" type="submit" />

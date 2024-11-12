@@ -10,6 +10,11 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import Category from './pages/Category';
 import Cart from './pages/Cart';
+import UserDashboard from "./pages/user/UserDashboard";
+import Private from './conponents/Routes/Private';
+import Forgotpassword from './pages/Auth/Forgotepassword';
+import AdminRoute from './conponents/Routes/AdminRoute';
+import AdminDashboard from './pages/Admin/AdminDashboard';
 
 const App = () => {
   return (
@@ -17,6 +22,15 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/forgotepassword" element={<Forgotpassword />} />
+
+      <Route path="/dashboard" element={<Private />}>
+        <Route path="" element={<UserDashboard />} />
+      </Route>
+      <Route path="/dashboard" element={<AdminRoute />}>
+        <Route path="admin" element={<AdminDashboard />} />
+      </Route>
+
       <Route path="/about" element={<About />} />
       <Route path="/category" element={<Category />} />
       <Route path="/contact" element={<Contact />} />
