@@ -15,6 +15,11 @@ import Private from './conponents/Routes/Private';
 import Forgotpassword from './pages/Auth/Forgotepassword';
 import AdminRoute from './conponents/Routes/AdminRoute';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import CreateCategory from './pages/Admin/CreateCategory';
+import CreateProducts from './pages/Admin/CreateProducts';
+import Users from './pages/Admin/Users';
+import Profile from './pages/user/Profile';
+import Orders from './pages/user/Orders';
 
 const App = () => {
   return (
@@ -26,9 +31,14 @@ const App = () => {
 
       <Route path="/dashboard" element={<Private />}>
         <Route path="" element={<UserDashboard />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="orders" element={<Orders/>} />
       </Route>
       <Route path="/dashboard" element={<AdminRoute />}>
         <Route path="admin" element={<AdminDashboard />} />
+        <Route path="admin/create-category" element={<CreateCategory/>} />
+        <Route path="admin/create-products" element={<CreateProducts />} />
+        <Route path="admin/users" element={<Users />} />
       </Route>
 
       <Route path="/about" element={<About />} />

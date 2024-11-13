@@ -19,7 +19,7 @@ const Header = () => {
     localStorage.removeItem("auth")
     // navigate("/login")
   }
-  console.log(auth.user.role)
+  // console.log(auth.user.role)
   return (
     <div className="flex justify-between bg-gray-700 text-white px-6 shadow-lg py-6">
       <h1 className="text-2xl capitalize flex items-center gap-2 font-bold ">

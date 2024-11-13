@@ -21,7 +21,7 @@ const AdminRoute = () => {
     };
     if (auth?.token) authChech();
   }, [auth?.token]);
-  return ok ? <Outlet /> : <Spinner />;
+  return ok ? <Outlet /> : <Spinner path="" />;
 };
 
 export default AdminRoute;
