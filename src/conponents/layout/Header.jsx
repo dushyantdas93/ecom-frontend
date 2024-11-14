@@ -17,7 +17,7 @@ const Header = () => {
   const handleLogout = function () {
     setAuth({ ...auth, user: null, token: "" })
     localStorage.removeItem("auth")
-    // navigate("/login")
+    navigate("/login")
   }
   // console.log(auth.user.role)
   return (
