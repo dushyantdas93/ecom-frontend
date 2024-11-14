@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const Initial = {
   name: "",
@@ -7,10 +7,10 @@ const Initial = {
   category: "",
   price: "",
   quantity: "",
-  shipping: true,
+  shipping: "",
   photo: "",
 };
-const Create = ({ open, setOpen }) => {
+const Create = ({ open, setOpen,createCategory,editItem }) => {
   const [createProduct, setCreateProduct] = useState(Initial);
   const [categories, setCategories] = useState([]);
 
@@ -34,8 +34,21 @@ const Create = ({ open, setOpen }) => {
   };
 
   useEffect(() => {
+   
     getAllCategory();
   }, []);
+  useEffect(()=>{ console.log("edititem ",editItem)
+    if(editItem){
+      setCreateProduct({
+        name:editItem.name ,
+        description:editItem.description,
+        category: editItem.category,
+        price: editItem.price,
+        quantity:editItem.quantity,
+        shipping: editItem.shipping,
+        photo: editItem.photo,
+    })
+    }},[editItem])
   return (
     <div
       className={`${
@@ -48,13 +61,21 @@ const Create = ({ open, setOpen }) => {
       >
         x
       </button>
-      <form action="" className="flex flex-col ">
+{/* {createProduct.photo &&  <img src={URL.createObjectURL(createProduct)} alt="" />} */}
+      <form action="" className="flex flex-col " onSubmit={(e)=>{
+        e.preventDefault()
+        if(createCategory(createProduct)){
+setCreateProduct(Initial)
+setOpen(false)
+        }
+      }}>
         <input
           type="file"
           name="photo"
           placeholder="upload photos"
           onChange={handleChange}
           value={createProduct.photo}
+          required
           className="size-80 border rounded-sm flex items-center justify-center"
         />
         <input
@@ -62,6 +83,7 @@ const Create = ({ open, setOpen }) => {
           name="name"
           value={createProduct.name}
           onChange={handleChange}
+          required
           placeholder="enter product name"
         />
         <input
@@ -69,12 +91,13 @@ const Create = ({ open, setOpen }) => {
           name="description"
           value={createProduct.description}
           onChange={handleChange}
+          required
           placeholder="enter product description"
         />
-        <select name="category" id="">
+        <select name="category" id="" value={createProduct.category._id} onChange={handleChange} required>
           <option value="">select category </option>
           {categories?.map((item, idx) => {
-            return <option value={createProduct.category}>{item.name}</option>;
+            return <option value={item._id}>{item.name}</option>;
           })}
         </select>
         <input
@@ -82,19 +105,21 @@ const Create = ({ open, setOpen }) => {
           name="price"
           value={createProduct.price}
           onChange={handleChange}
+          required
           placeholder="enter product price"
         />
         <input
-          type="text"
-          name="quntity"
+          type="number"
+          name="quantity"
           value={createProduct.quantity}
           onChange={handleChange}
+          required
           placeholder="enter product quantity"
         />
-        <select name="shipping" id="" onChange={handleChange}>
-          <option value="">select shiping</option>
-          <option value={createProduct.shipping}>yes</option>
-          <option value={createProduct.shipping}>no</option>
+        <select name="shipping" id="" value={createProduct.shipping} onChange={handleChange} required>
+          <option >select shiping</option>
+          <option value='true'>yes</option>
+          <option value='false'>no</option>
         </select>
         <input type="submit" value="create product " className="border" />
       </form>
