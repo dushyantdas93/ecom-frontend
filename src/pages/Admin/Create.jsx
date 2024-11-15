@@ -16,14 +16,14 @@ const Create = ({ open, setOpen,createCategory,editItem }) => {
 
   const handleChange = (e) => {
     setCreateProduct({ ...createProduct, [e.target.name]: e.target.value });
-    console.log(createProduct);
+    // console.log(createProduct);
   };
   const getAllCategory = async () => {
     try {
       const { data } = await axios.get(
         "http://localhost:8080/api/v1/category/get-category"
       );
-      console.log(data);
+      // console.log(data);
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -37,7 +37,7 @@ const Create = ({ open, setOpen,createCategory,editItem }) => {
    
     getAllCategory();
   }, []);
-  useEffect(()=>{ console.log("edititem ",editItem)
+  useEffect(()=>{ 
     if(editItem){
       setCreateProduct({
         name:editItem.name ,
@@ -53,7 +53,7 @@ const Create = ({ open, setOpen,createCategory,editItem }) => {
     <div
       className={`${
         open ? "absolute" : "hidden"
-      }  h-[700px] w-[800px] absolute top-40  border  p-10`}
+      }  h-[700px] w-[800px] absolute top-40  border  p-10 bg-gray-300`}
     >
       <button
         className="text-2xl absolute  top-2 right-5"
@@ -75,7 +75,7 @@ setOpen(false)
           placeholder="upload photos"
           onChange={handleChange}
           value={createProduct.photo}
-          required
+
           className="size-80 border rounded-sm flex items-center justify-center"
         />
         <input

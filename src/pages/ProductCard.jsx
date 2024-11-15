@@ -25,14 +25,19 @@ const ProductCard = ({item,handleUpdate}) => {
     
   }
   return (
-      <div className="size-80 border">
-          <img src={item.photo} alt="" />
-          name: <h1 key={item._id}>{item.name}</h1>
-          {/* {item._id} */}
-          <button onClick={()=>handleUpdate(item)}>update</button>
-         <button onClick={()=>handleDelete(item._id)}>delete</button>
+    <div className="size-80 border">
+      <img src={item.photo} alt="" />
+      name: <h1 key={item._id}>{item.name}</h1>
+      {/* {item._id} */}
+      <img
+        src={`http://localhost:8080/api/v1/product/product-photo/${item._id}`}
+        alt=""
+        className="size-20"
+      />
+      <button onClick={() => handleUpdate(item)}>update</button>
+      <button onClick={() => handleDelete(item._id)}>delete</button>
     </div>
-  )
+  );
 }
 
 export default ProductCard
