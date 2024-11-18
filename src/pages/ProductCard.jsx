@@ -28,6 +28,7 @@ const ProductCard = ({item,handleUpdate}) => {
     <div className="size-80 border">
       <img src={item.photo} alt="" />
       name: <h1 key={item._id}>{item.name}</h1>
+      
       {/* {item._id} */}
       <img
         src={`http://localhost:8080/api/v1/product/product-photo/${item._id}`}

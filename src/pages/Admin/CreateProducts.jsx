@@ -6,6 +6,7 @@ import { HiBattery100 } from "react-icons/hi2";
 import ProductCard from "../ProductCard.jsx";
 import Create from "./Create.jsx";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const CreateProducts = () => {
   const [products, setProducts] = useState([]);
@@ -113,9 +114,11 @@ const CreateProducts = () => {
             />
 
             {products?.map((item) => (
-              <div key={item._id}>
-                <ProductCard handleUpdate={handleUpdate} item={item} />
-              </div>
+              <Link to={`/dashboard/admin/product/${item.slug}`}>
+                <div key={item._id}>
+                  <ProductCard handleUpdate={handleUpdate} item={item} />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
